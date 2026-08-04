@@ -1,0 +1,6 @@
+interface:
+  display_name: "Onboard AIOS"
+  short_description: "Set up personal context and source-of-truth routes"
+  default_prompt: "Use $onboard-aios to set up this fresh AIOS with me."
+policy:
+  allow_implicit_invocation: false

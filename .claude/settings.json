@@ -1,0 +1,8 @@
+{
+  "skillOverrides": {
+    "audit-aios": "user-invocable-only",
+    "new-aios-project": "user-invocable-only",
+    "onboard-aios": "user-invocable-only",
+    "wrap-aios": "user-invocable-only"
+  }
+}

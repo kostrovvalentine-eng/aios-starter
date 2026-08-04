@@ -1,0 +1,72 @@
+# AIOS Operating Contract
+
+This repository is the user's personal AI operating system. Codex is the primary runtime. Claude uses the same sources through `CLAUDE.md`; never maintain a second instruction or memory hierarchy.
+
+## Authority and source precedence
+
+1. Current user intent and platform safety requirements.
+2. The nearest `AGENTS.md`, then this root contract.
+3. Runtime-neutral protocols under `references/`.
+4. Area routers.
+5. The selected content file or documented live system.
+
+For current external state, the live system documented in `connections.md` wins over Markdown. Record durable decisions in `decisions/log.md`; do not preserve contradictions as competing truths.
+
+## Canonical map
+
+| Concern | Source of truth |
+|---|---|
+| Root behavior | `AGENTS.md` |
+| Routing | `references/router-protocol.md` |
+| Personal and business context | `context/` |
+| Project memory | `projects/` |
+| Project registry | `projects/registry.json` |
+| Decisions | `decisions/log.md` |
+| Connections and live-source rules | `connections.md` |
+| Tasks before a task service is connected | `inbox/tasks.md` |
+| Events before a calendar is connected | `inbox/events.md` |
+| Reusable workflows | `skills/{name}/` |
+| Raw sources | `raw/` |
+| Generated map | `INDEX.md` |
+
+## Load context on demand
+
+For AIOS, memory, project, tool, task, skill, or routing requests, read `references/router-protocol.md`. Resolve the exact area and target file instead of loading the whole repository. Read priorities only when prioritization matters. Read `connections.md` before using external services.
+
+If `context/system-state.md` says `Status: fresh`, explain that onboarding is required and ask the user to invoke `$onboard-aios`. Do not guess personal facts or silently start a personal skill.
+
+## Capture and placement
+
+Follow `references/auto-capture.md` when a conversation creates or changes a task, event, decision, priority, person, connection, project state, or session handoff.
+
+- Tasks go to the connected canonical task system. Until one is verified, deduplicate and append to `inbox/tasks.md`.
+- Events go to the connected calendar. Until one is verified, append to `inbox/events.md` and label them `needs-sync`.
+- Decisions append to `decisions/log.md` with reasoning and links.
+- Context changes require explicit user intent or `$wrap-aios`.
+- Ordinary conversation is not durable memory.
+
+Never duplicate a live database into Markdown. A local fallback stops being canonical only after migration to a verified external source.
+
+## Structure and project work
+
+Before changing AIOS structure, read `references/aios-structure.md`. Before changing memory, read `references/context-update.md`.
+
+Durable meaning, strategy, state, decisions, and constraints belong in this repository. Code, datasets, generated artifacts, and execution plans belong in separate repositories under `dev/{slug}/`. Preserve unrelated dirty changes and use exact pathsets when committing.
+
+## External tools and secrets
+
+Do not infer access from visible tools alone. `connections.md` documents intended access; read-only checks prove current access. Store secrets in an OS keychain or process environment. Never print or save tokens, passwords, session strings, recovery codes, or private keys in Markdown, Git, summaries, logs, or task systems.
+
+Sending messages, changing external records, deleting data, pushing Git, deploying, or rotating credentials requires explicit current user intent. Show exact text sent on the user's behalf.
+
+## Skills
+
+Personal skills are manual-only. Invoke one only when the user names it with `$name`, asks for that workflow by exact name, or continues an active run. Author skills only under `skills/`; `.agents/skills` and `.claude/skills` are generated adapters.
+
+## Session close
+
+On explicit `$wrap-aios`, save minimum sufficient durable state, run the doctor, show exact files, and create scoped local commits. Never push by default.
+
+## Communication
+
+Be direct, concise, evidence-based, and clear about uncertainty. Lead with the outcome. End completed work with one useful next action when applicable.

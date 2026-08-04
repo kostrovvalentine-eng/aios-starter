@@ -1,0 +1,6 @@
+interface:
+  display_name: "New AIOS Project"
+  short_description: "Create routed project memory and execution space"
+  default_prompt: "Use $new-aios-project to create and route a new project."
+policy:
+  allow_implicit_invocation: false

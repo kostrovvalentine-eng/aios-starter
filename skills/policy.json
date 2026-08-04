@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "scope": "personal-aios-skills",
+  "default_invocation": "manual-only",
+  "implicit_invocation_allowlist": [],
+  "hidden_from_discovery": []
+}

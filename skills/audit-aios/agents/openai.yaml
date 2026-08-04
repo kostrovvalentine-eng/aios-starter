@@ -1,0 +1,6 @@
+interface:
+  display_name: "Audit AIOS"
+  short_description: "Check routing, freshness, connections, and cadence"
+  default_prompt: "Use $audit-aios to check whether this AIOS is healthy."
+policy:
+  allow_implicit_invocation: false

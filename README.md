@@ -42,7 +42,7 @@ No external service, API key, or paid subscription is required for the first day
    node scripts/bootstrap.mjs
    ```
 
-   Expected output ends with `AIOS bootstrap complete.` It also prints two warnings that are correct at this stage: onboarding is not complete, and the working tree has changes.
+   Expected output ends with `AIOS bootstrap complete.` It also prints one warning, `onboarding is not complete`, which is correct at this stage. The working tree stays clean.
 
 3. Open the cloned folder in Codex.
 

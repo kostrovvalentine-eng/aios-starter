@@ -161,14 +161,25 @@ try {
 }
 
 if (writeIndex && errors.length === 0) {
+  const indexFile = path.join(root, "INDEX.md");
   const entries = markdown
     .map((file) => path.relative(root, file))
     .filter((file) => file !== "INDEX.md")
     .sort()
     .map((file) => `- [${file}](${file})`)
     .join("\n");
-  const date = new Date().toISOString().slice(0, 10);
-  fs.writeFileSync(path.join(root, "INDEX.md"), `# AIOS Index\n*Generated: ${date} by scripts/aios-doctor.mjs*\n\n${entries}\n`);
+  // Rewrite only when the file map actually changed. Regenerating the same
+  // entries with a new date turns INDEX.md dirty every single day and makes a
+  // brand new install look broken on its second morning.
+  const previous = fs.existsSync(indexFile) ? fs.readFileSync(indexFile, "utf8") : "";
+  const previousEntries = previous
+    .split("\n")
+    .filter((line) => line.startsWith("- ["))
+    .join("\n");
+  if (previousEntries !== entries) {
+    const date = new Date().toISOString().slice(0, 10);
+    fs.writeFileSync(indexFile, `# AIOS Index\n*Last map change: ${date} by scripts/aios-doctor.mjs*\n\n${entries}\n`);
+  }
 }
 
 if (!quiet || errors.length) {

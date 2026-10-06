@@ -1,5 +1,5 @@
 # AIOS Index
-*Generated: 2026-10-06 by scripts/aios-doctor.mjs*
+*Last map change: 2026-10-06 by scripts/aios-doctor.mjs*
 
 - [AGENTS.md](AGENTS.md)
 - [CLAUDE.md](CLAUDE.md)

@@ -1,5 +1,5 @@
 # AIOS Index
-*Generated: 2026-08-04 by scripts/aios-doctor.mjs*
+*Generated: 2026-10-06 by scripts/aios-doctor.mjs*
 
 - [AGENTS.md](AGENTS.md)
 - [CLAUDE.md](CLAUDE.md)
@@ -14,6 +14,7 @@
 - [context/system-state.md](context/system-state.md)
 - [context/team/overview.md](context/team/overview.md)
 - [decisions/log.md](decisions/log.md)
+- [docs/ru/START-HERE.md](docs/ru/START-HERE.md)
 - [inbox/events.md](inbox/events.md)
 - [inbox/tasks.md](inbox/tasks.md)
 - [log.md](log.md)

@@ -22,5 +22,6 @@ run("bash", ["scripts/sync-skills.sh"]);
 run(process.execPath, ["scripts/aios-doctor.mjs", "--write-index"]);
 
 console.log("\nAIOS bootstrap complete.");
-console.log("Open this folder in Codex and send:");
-console.log("Use $onboard-aios to explain this system and set it up with me.");
+console.log("Start a new session in this folder and send:");
+console.log("  Claude: /onboard-aios");
+console.log("  Codex:  Use $onboard-aios to explain this system and set it up with me.");

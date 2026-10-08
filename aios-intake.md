@@ -3,7 +3,7 @@
 
 Status: fresh
 
-The `$onboard-aios` skill asks these questions one at a time and saves every answer immediately so setup can resume after interruption.
+The `onboard-aios` skill asks these questions one at a time and saves every answer immediately so setup can resume after interruption.
 
 ## Q1 — Identity and business
 

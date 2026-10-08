@@ -1,6 +1,6 @@
 ---
 name: wrap-aios
-description: Close an AIOS work session by saving only durable meaning to canonical files, preserving execution artifacts in the correct dev repository, validating the system, and creating exact local Git commits without pushing. Use only when the user explicitly invokes `$wrap-aios`, asks to run AIOS wrap by name, or continues an active wrap.
+description: Close an AIOS work session by saving only durable meaning to canonical files, preserving execution artifacts in the correct dev repository, validating the system, and creating exact local Git commits without pushing. Use only when the user explicitly invokes `/wrap-aios` (Claude) or `$wrap-aios` (Codex), asks to run AIOS wrap by name, or continues an active wrap.
 ---
 
 # Wrap AIOS

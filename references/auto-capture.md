@@ -21,4 +21,4 @@ Update their canonical files only when the change is explicit. Follow `reference
 
 ## Session end
 
-On `$wrap-aios`, capture only durable meaning, run the doctor, show exact files, and create scoped local commits. Never push automatically.
+On an explicit wrap-aios run, capture only durable meaning, run the doctor, show exact files, and create scoped local commits. Never push automatically.

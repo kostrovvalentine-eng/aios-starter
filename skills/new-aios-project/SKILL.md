@@ -1,6 +1,6 @@
 ---
 name: new-aios-project
-description: Create or register a new AIOS project with aliases, routed current-state memory, optional deep context, and a separate execution repository only when needed. Use only when the user explicitly invokes `$new-aios-project`, asks to run the new AIOS project workflow by name, or continues an active project-creation run.
+description: Create or register a new AIOS project with aliases, routed current-state memory, optional deep context, and a separate execution repository only when needed. Use only when the user explicitly invokes `/new-aios-project` (Claude) or `$new-aios-project` (Codex), asks to run the new AIOS project workflow by name, or continues an active project-creation run.
 ---
 
 # New AIOS Project

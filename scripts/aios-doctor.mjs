@@ -149,7 +149,7 @@ for (const file of rawFiles) {
 const state = fs.existsSync(path.join(root, "context/system-state.md"))
   ? fs.readFileSync(path.join(root, "context/system-state.md"), "utf8")
   : "";
-if (/Status:\s*fresh/i.test(state)) warnings.push("onboarding is not complete; run $onboard-aios");
+if (/Status:\s*fresh/i.test(state)) warnings.push("onboarding is not complete; run onboard-aios (/onboard-aios in Claude, $onboard-aios in Codex)");
 
 let dirtyCount = 0;
 try {

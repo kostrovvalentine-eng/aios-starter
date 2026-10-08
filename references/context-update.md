@@ -15,4 +15,4 @@ Save the minimum sufficient durable state, not a transcript.
 | Tool and source-of-truth boundary | `connections.md` |
 | Code, data, plans, generated artifacts | separate `dev/{slug}` repo |
 
-Context files change only with explicit user intent or `$wrap-aios`. Update the line-2 date, preserve links, and state uncertainty instead of inventing facts.
+Context files change only with explicit user intent or an explicit wrap-aios run. Update the line-2 date, preserve links, and state uncertainty instead of inventing facts.

@@ -1,6 +1,6 @@
 ---
 name: onboard-aios
-description: Set up a fresh or intentionally reset AIOS through a resumable seven-question interview, then generate routed personal context, projects, sources of truth, guardrails, and a validated local Git checkpoint. Use only when the user explicitly invokes `$onboard-aios`, asks to run AIOS onboarding by name, or continues an active onboarding run.
+description: Set up a fresh or intentionally reset AIOS through a resumable seven-question interview, then generate routed personal context, projects, sources of truth, guardrails, and a validated local Git checkpoint. Use only when the user explicitly invokes `/onboard-aios` (Claude) or `$onboard-aios` (Codex), asks to run AIOS onboarding by name, or continues an active onboarding run.
 ---
 
 # Onboard AIOS

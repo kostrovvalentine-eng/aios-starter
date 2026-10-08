@@ -1,6 +1,6 @@
 # AIOS Operating Contract
 
-This repository is the user's personal AI operating system. Codex is the primary runtime. Claude uses the same sources through `CLAUDE.md`; never maintain a second instruction or memory hierarchy.
+This repository is the user's personal AI operating system. Claude and Codex are equal runtimes of the same system: Claude loads this file through `CLAUDE.md`, Codex discovers it directly. Both read and write the same canonical files, so either can continue the other's work. Never maintain a second instruction or memory hierarchy.
 
 ## Authority and source precedence
 
@@ -33,7 +33,7 @@ For current external state, the live system documented in `connections.md` wins 
 
 For AIOS, memory, project, tool, task, skill, or routing requests, read `references/router-protocol.md`. Resolve the exact area and target file instead of loading the whole repository. Read priorities only when prioritization matters. Read `connections.md` before using external services.
 
-If `context/system-state.md` says `Status: fresh`, explain that onboarding is required and ask the user to invoke `$onboard-aios`. Do not guess personal facts or silently start a personal skill.
+If `context/system-state.md` says `Status: fresh`, explain that onboarding is required and ask the user to invoke the onboarding skill: `/onboard-aios` in Claude, `$onboard-aios` in Codex. If the user is new to this, tell them it is fine to answer in plain words and that they can stop at any point. Do not guess personal facts or silently start a personal skill.
 
 ## Capture and placement
 
@@ -42,7 +42,7 @@ Follow `references/auto-capture.md` when a conversation creates or changes a tas
 - Tasks go to the connected canonical task system. Until one is verified, deduplicate and append to `inbox/tasks.md`.
 - Events go to the connected calendar. Until one is verified, append to `inbox/events.md` and label them `needs-sync`.
 - Decisions append to `decisions/log.md` with reasoning and links.
-- Context changes require explicit user intent or `$wrap-aios`.
+- Context changes require explicit user intent or an explicit wrap-aios run.
 - Ordinary conversation is not durable memory.
 
 Never duplicate a live database into Markdown. A local fallback stops being canonical only after migration to a verified external source.
@@ -61,12 +61,12 @@ Sending messages, changing external records, deleting data, pushing Git, deployi
 
 ## Skills
 
-Personal skills are manual-only. Invoke one only when the user names it with `$name`, asks for that workflow by exact name, or continues an active run. Author skills only under `skills/`; `.agents/skills` and `.claude/skills` are generated adapters.
+Personal skills are manual-only. Invoke one only when the user names it (`/name` in Claude, `$name` in Codex), asks for that workflow by exact name, or continues an active run. Author skills only under `skills/`; `.agents/skills` and `.claude/skills` are generated adapters.
 
 ## Session close
 
-On explicit `$wrap-aios`, save minimum sufficient durable state, run the doctor, show exact files, and create scoped local commits. Never push by default.
+On an explicit wrap-aios run, save minimum sufficient durable state, run the doctor, show exact files, and create scoped local commits. Never push by default.
 
 ## Communication
 
-Be direct, concise, evidence-based, and clear about uncertainty. Lead with the outcome. End completed work with one useful next action when applicable.
+Be direct, concise, evidence-based, and clear about uncertainty. Many owners are not technical: explain terminal commands, Git, and file paths in plain words when they come up, and run setup commands yourself instead of asking the user to type them. Lead with the outcome. End completed work with one useful next action when applicable.

@@ -5,6 +5,6 @@ Canonical task source until `connections.md` names a verified task system and mi
 
 ## Open
 
-- [ ] Complete `$onboard-aios`.
+- [ ] Complete onboarding (`/onboard-aios` in Claude, `$onboard-aios` in Codex).
 
 ## Done

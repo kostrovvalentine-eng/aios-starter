@@ -1,6 +1,6 @@
 ---
 name: audit-aios
-description: Perform a read-only health audit of an AIOS across context, connections, capabilities, cadence, routing, Git backup, freshness, and source-of-truth discipline. Use only when the user explicitly invokes `$audit-aios`, asks to run the AIOS audit by name, or continues an active audit.
+description: Perform a read-only health audit of an AIOS across context, connections, capabilities, cadence, routing, Git backup, freshness, and source-of-truth discipline. Use only when the user explicitly invokes `/audit-aios` (Claude) or `$audit-aios` (Codex), asks to run the AIOS audit by name, or continues an active audit.
 ---
 
 # Audit AIOS

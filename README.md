@@ -27,7 +27,7 @@ No external service, API key, or paid subscription is required for the first day
 |---|---|---|
 | Node.js 20 or newer | runs the setup, doctor, and tests | `node --version` |
 | Git | version history and the initial commit | `git --version` |
-| Codex, installed and signed in | the agent that reads this repository | open Codex once before starting |
+| Claude Desktop (Code tab, paid plan) or Codex | the agent that reads this repository | open it once and sign in |
 | A GitHub account | "Use this template" creates your private copy | — |
 
 ## Install in five minutes
@@ -44,13 +44,17 @@ No external service, API key, or paid subscription is required for the first day
 
    Expected output ends with `AIOS bootstrap complete.` It also prints one warning, `onboarding is not complete`, which is correct at this stage. The working tree stays clean.
 
-3. Open the cloned folder in Codex.
+3. Start a new session on the cloned folder (not its parent) in Claude Desktop's Code tab or in Codex.
 
 4. Send this exact first message:
 
    ```text
-   Use $onboard-aios to explain this system and set it up with me.
+   /onboard-aios
    ```
+
+   In Codex: `Use $onboard-aios to explain this system and set it up with me.`
+
+   Never used a terminal? In Claude Desktop you can skip step 2: open an empty folder in the Code tab and let Claude clone and bootstrap for you. The [Russian guide](docs/ru/START-HERE.md#5-шаги) has the exact message to paste.
 
 5. Answer seven questions. The agent saves each answer immediately to `aios-intake.md`, so you can stop and resume.
 
@@ -74,7 +78,7 @@ You do not need to prepare anything, but answers get much better if you think ab
 |---|---|
 | Day 1 | Ask: *"What should I focus on this week, and why?"* The answer uses only your new context files. |
 | Day 2 | Pick **one** service from `connections.md` and connect it. Read-only first. Mark it `connected` only after a read-only check succeeds. |
-| Day 7 | Run `$audit-aios` to score context, connections, capabilities, and cadence. |
+| Day 7 | Run `audit-aios` to score context, connections, capabilities, and cadence. |
 
 Until a task system and a calendar are verified working, `inbox/tasks.md` and `inbox/events.md` stay the canonical sources. That is intentional: you never lose a task waiting for an integration.
 
@@ -108,10 +112,12 @@ One fact has exactly one canonical home. Routers point at it instead of copying 
 
 ## Core commands
 
-- `$onboard-aios` — first-run interview and foundation scaffold.
-- `$new-aios-project` — create routed project memory and an optional execution repo.
-- `$wrap-aios` — save durable session state and create scoped local commits.
-- `$audit-aios` — inspect context, connections, capabilities, cadence, and backup health.
+Invoke with `/name` in Claude and `$name` in Codex.
+
+- `onboard-aios` — first-run interview and foundation scaffold.
+- `new-aios-project` — create routed project memory and an optional execution repo.
+- `wrap-aios` — save durable session state and create scoped local commits.
+- `audit-aios` — inspect context, connections, capabilities, cadence, and backup health.
 
 Verification, all dependency-free beyond Node.js and Git:
 
@@ -139,15 +145,15 @@ Install a current Node.js release, then reopen the terminal and check `node --ve
 **`npm test` fails on skill adapters.**
 Run `bash scripts/sync-skills.sh` and try again. It recreates the `.agents/skills` and `.claude/skills` symlinks.
 
-**Codex does not see `$onboard-aios`.**
-The skills are discovered from the repository root. Make sure Codex was opened on the cloned folder, not on its parent, and run the bootstrap first.
+**The agent does not see `onboard-aios`.**
+Skills and rules are loaded from the repository root when a session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new session.
 
 **The agent asks something you already answered.**
 It reads `aios-intake.md` to resume. Edit that file directly and ask it to continue onboarding.
 
 **You want to start over.**
-Delete the generated files listed in `references/aios-structure.md`, set `context/system-state.md` back to `Status: fresh`, and run `$onboard-aios` again. Your Git history still has everything.
+Delete the generated files listed in `references/aios-structure.md`, set `context/system-state.md` back to `Status: fresh`, and run `onboard-aios` again. Your Git history still has everything.
 
 ## Attribution
 
-This project is a Codex-first evolution of [Nate Herk's AIS-OS starter kit](https://github.com/nateherkai/AIS-OS). The original kit introduced the onboarding, audit, and incremental AIOS-building pattern. See `LICENSE`.
+This project is a runtime-neutral (Claude and Codex) evolution of [Nate Herk's AIS-OS starter kit](https://github.com/nateherkai/AIS-OS). The original kit introduced the onboarding, audit, and incremental AIOS-building pattern. See `LICENSE`.

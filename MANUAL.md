@@ -1,5 +1,5 @@
 # AIOS Manual
-*Last updated: 2026-08-04*
+*Last updated: 2026-10-08*
 
 AIOS is a repository around an AI agent. Files provide durable context and operating rules; connected services provide current records; skills provide repeatable workflows; schedules provide cadence.
 

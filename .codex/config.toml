@@ -1,3 +1,4 @@
-[features]
-goals = true
-hooks = true
+# Project-level Codex settings for this AIOS. Codex loads this file only after
+# you trust the folder. Keep it small: shared rules live in AGENTS.md and
+# skills in skills/. There is intentionally no session-start hook, so a new
+# owner is never asked to approve code that runs outside the sandbox.

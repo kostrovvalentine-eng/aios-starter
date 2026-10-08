@@ -1,6 +1,6 @@
 # AIOS Operating Contract
 
-This repository is the user's personal AI operating system. Every agent runtime is an equal seat of the same system: Codex, Cursor and most others read this file directly, Claude and Gemini load it through one-line `CLAUDE.md` and `GEMINI.md` shims. Both read and write the same canonical files, so either can continue the other's work. Never maintain a second instruction or memory hierarchy.
+This repository is the user's personal AI operating system. Every agent runtime is an equal seat of the same system: Codex, Cursor and most others read this file directly, Claude and Gemini load it through one-line `CLAUDE.md` and `GEMINI.md` shims. All of them read and write the same canonical files, so any runtime can continue another's work. Never maintain a second instruction or memory hierarchy.
 
 ## Authority and source precedence
 
@@ -75,4 +75,4 @@ On an explicit wrap-aios run or "сохрани контекст", save minimum 
 
 ## Communication
 
-Reply in the user's language. Be direct, concise, evidence-based, and clear about uncertainty. Lead with what actually happened and distinguish done, attempted, and blocked. Many owners are not technical: explain terminal commands, Git, and file paths in plain words when they come up, and run setup commands yourself instead of asking the user to type them. End completed work with one useful next action when applicable.
+Reply in the user's language. Be direct, concise, evidence-based, and clear about uncertainty. Lead with what actually happened and distinguish done, attempted, and blocked. Many owners are not technical: explain terminal commands, Git, and file paths in plain words when they come up, and run setup commands yourself instead of asking the user to type them. When a command needs the user's approval (a sandbox escalation for downloads, `.git` writes such as commits, or other protected folders), say in one plain sentence what it does and why before asking. End completed work with one useful next action when applicable.

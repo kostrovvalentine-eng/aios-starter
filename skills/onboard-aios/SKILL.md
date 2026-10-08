@@ -10,7 +10,7 @@ Turn the neutral starter into the user's private operating system without guessi
 ## Prepare
 
 1. Read `AGENTS.md`, `aios-intake.md`, `context/system-state.md`, `connections.md`, and the three structure/capture protocols under `references/`.
-2. Check that `git config user.name` and `git config user.email` are set. If either is missing, ask the user for the name and email they want on their commits and set them for this repository only (`git config user.name ...` without `--global`). Never invent an email.
+2. Check that `git config user.name` and `git config user.email` are set. If either is missing, ask the user for the name and email they want on their saved versions and set them for this repository only (`git config user.name ...` without `--global`). Never invent an email. In a sandboxed runtime such as Codex, writing `.git` needs the user's approval: say in one sentence that this only labels saved versions on their computer.
 3. Record the initial `git status --short`; never include pre-existing unrelated changes in the setup commit.
 4. If onboarding is already active, summarize existing answers and resume from the first unanswered question. Do not overwrite completed context unless the user explicitly requests a reset.
 5. Explain in four short points, in plain words for someone who has never used a terminal or Git:
@@ -47,7 +47,7 @@ After all seven answers are saved:
 
 ## Save
 
-List only files created or changed by this onboarding run. Run `node scripts/commit-selected.mjs --plan` with `--file` for each exact path, then create the local commit with `--summary "complete initial onboarding"`. Explain the commit in one sentence ("saved a restore point on your computer, nothing was sent anywhere"). Do not push.
+List only files created or changed by this onboarding run. The commit writes `.git`, so a sandboxed runtime will ask the user to approve it; say so before running it. Run `node scripts/commit-selected.mjs --plan` with `--file` for each exact path, then create the local commit with `--summary "complete initial onboarding"`. Explain the commit in one sentence ("saved a restore point on your computer, nothing was sent anywhere"). Do not push.
 
 Finish with these three lines, translated into the user's language:
 

@@ -26,23 +26,47 @@ if [[ ${#adapters[@]} -eq 0 ]]; then
   exit 1
 fi
 
+# Touch only what is wrong. Agent sandboxes (Codex workspace-write) keep
+# .agents/ read-only, so a fresh clone whose committed links are already
+# correct must pass without a single write.
+changed=0
 for adapter in "${adapters[@]}"; do
-  mkdir -p "${adapter}"
-  while IFS= read -r existing; do
-    if [[ -L "${existing}" ]]; then
-      rm "${existing}"
-    else
-      printf 'Refusing to overwrite non-symlink adapter: %s\n' "${existing}" >&2
-      exit 1
-    fi
-  done < <(find "${adapter}" -mindepth 1 -maxdepth 1 -print | sort)
+  [[ -d "${adapter}" ]] || { mkdir -p "${adapter}"; changed=1; }
 
+  wanted=" "
   while IFS= read -r skill_dir; do
     skill_name="$(basename "${skill_dir}")"
     is_hidden "${skill_name}" && continue
+    wanted="${wanted}${skill_name} "
+    link="${adapter}/${skill_name}"
     rel="$(node -e 'const p=require("path"); console.log(p.relative(process.argv[1], p.join(process.argv[2], "skills", process.argv[3])))' "${adapter}" "${AIOS_ROOT}" "${skill_name}")"
-    ln -s "${rel}" "${adapter}/${skill_name}"
+    if [[ -L "${link}" && "$(readlink "${link}")" == "${rel}" ]]; then
+      continue
+    fi
+    if [[ -e "${link}" && ! -L "${link}" ]]; then
+      printf 'Refusing to overwrite non-symlink adapter: %s\n' "${link}" >&2
+      exit 1
+    fi
+    [[ -L "${link}" ]] && rm "${link}"
+    ln -s "${rel}" "${link}"
+    changed=1
   done < <(find "${SKILLS_DIR}" -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print | sort)
+
+  while IFS= read -r existing; do
+    name="$(basename "${existing}")"
+    [[ "${wanted}" == *" ${name} "* ]] && continue
+    if [[ -L "${existing}" ]]; then
+      rm "${existing}"
+      changed=1
+    else
+      printf 'Refusing to remove non-symlink adapter: %s\n' "${existing}" >&2
+      exit 1
+    fi
+  done < <(find "${adapter}" -mindepth 1 -maxdepth 1 -print | sort)
 done
 
-printf 'Synced AIOS skill adapters.\n'
+if [[ ${changed} -eq 1 ]]; then
+  printf 'Synced AIOS skill adapters.\n'
+else
+  printf 'AIOS skill adapters already up to date.\n'
+fi

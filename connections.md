@@ -21,6 +21,6 @@ When connecting a service, document its owner, read/write scope, authentication 
 ## Easiest first connection
 
 - **Claude Desktop:** built-in connectors (Google Calendar, Gmail, Google Drive, Notion and others) are switched on in Claude's settings, no keys or code. Start read-only, verify one real read, then update this table.
-- **Codex:** add the service as an MCP server in its configuration, then verify the same way.
+- **Codex (ChatGPT desktop app):** connect the service through plugins in the app; if there is no plugin, add it as an MCP server in Codex settings. Verify the same way.
 
 Use one canonical source per domain. When a live task or calendar service is verified, migrate the open items from `inbox/` and mark the inbox as no longer canonical.

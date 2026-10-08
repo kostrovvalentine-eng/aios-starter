@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import fs from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,6 +23,14 @@ run("bash", ["scripts/sync-skills.sh"]);
 run(process.execPath, ["scripts/aios-doctor.mjs", "--write-index"]);
 
 console.log("\nAIOS bootstrap complete.");
-console.log("Start a new session in this folder and send:");
-console.log("  Claude: /onboard-aios");
-console.log("  Codex:  Use $onboard-aios to explain this system and set it up with me.");
+
+// Only a fresh install needs the onboarding hint. The onboarding skill runs
+// bootstrap again at the end, and repeating "start onboarding" there would
+// tell a brand-new owner to do it all over again.
+const statePath = path.join(root, "context/system-state.md");
+const state = fs.existsSync(statePath) ? fs.readFileSync(statePath, "utf8") : "";
+if (/Status:\s*fresh/i.test(state)) {
+  console.log("Start a new chat in this folder and send:");
+  console.log("  Codex:  $onboard-aios");
+  console.log("  Claude: /onboard-aios");
+}

@@ -13,15 +13,16 @@
       "Bash(git diff:*)",
       "Bash(git log:*)"
     ],
+    "ask": [
+      "Bash(git push:*)"
+    ],
     "deny": [
-      "Bash(git push:*)",
       "Read(./.env)",
       "Read(./.env.*)"
     ]
   },
   "skillOverrides": {
     "audit-aios": "user-invocable-only",
-    "new-aios-project": "user-invocable-only",
     "onboard-aios": "user-invocable-only",
     "wrap-aios": "user-invocable-only"
   }

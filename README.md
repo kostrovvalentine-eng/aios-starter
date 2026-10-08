@@ -19,7 +19,7 @@ It is not a chatbot, not a SaaS account, and not a database. It is your own priv
 - **A health check** in `scripts/aios-doctor.mjs` — deterministic validation of structure, routing, and freshness.
 - **Git-backed history** — every meaningful change is a commit you can read, diff, and revert.
 
-No external service, API key, or paid subscription is required for the first day.
+No external service or API key is needed on day one. You only need the agent app itself (for example a ChatGPT Plus plan for Codex).
 
 ## Requirements
 
@@ -27,10 +27,12 @@ No external service, API key, or paid subscription is required for the first day
 |---|---|---|
 | Node.js 20 or newer | runs the setup, doctor, and tests | `node --version` |
 | Git | version history and the initial commit | `git --version` |
-| An agent that can read local files: Claude Desktop (Code tab, paid plan), Codex, Cursor, Gemini CLI, Copilot | reads this repository | open it once and sign in |
-| A GitHub account | "Use this template" creates your private copy | — |
+| An agent that can read local files: Codex in the ChatGPT desktop app (Plus or higher), Claude Desktop (Code tab, paid plan), Cursor, Gemini CLI, Copilot | reads this repository | open it once and sign in |
+| A GitHub account (optional on day one) | "Use this template" creates your private copy; backup later | — |
 
 ## Install in five minutes
+
+**Never used a terminal?** Skip this section. Create an empty folder, add it as a local project in Codex (ChatGPT desktop app) or open it in Claude Desktop's Code tab, and paste the install message from the [Russian guide](docs/ru/START-HERE.md#5-шаги). The agent clones and bootstraps for you; you only approve its requests.
 
 1. Click **Use this template** → **Create a new repository** on GitHub. Make it **private**. Name it anything, for example `my-aios`.
 
@@ -44,17 +46,15 @@ No external service, API key, or paid subscription is required for the first day
 
    Expected output ends with `AIOS bootstrap complete.` It also prints one warning, `onboarding is not complete`, which is correct at this stage. The working tree stays clean.
 
-3. Start a new session on the cloned folder (not its parent) in Claude Desktop's Code tab or in Codex.
+3. Start a new chat or session on the cloned folder (not its parent): a local project in Codex, or the Code tab in Claude Desktop.
 
-4. Send this exact first message:
+4. Send this first message:
 
    ```text
-   /onboard-aios
+   $onboard-aios Let's set up my system.
    ```
 
-   In Codex: `Use $onboard-aios to explain this system and set it up with me.`
-
-   Never used a terminal? In Claude Desktop you can skip step 2: open an empty folder in the Code tab and let Claude clone and bootstrap for you. The [Russian guide](docs/ru/START-HERE.md#5-шаги) has the exact message to paste.
+   In Claude use `/onboard-aios` instead. Add "talk to me in <your language>" if you prefer another language.
 
 5. Answer seven questions. The agent saves each answer immediately to `aios-intake.md`, so you can stop and resume.
 
@@ -62,7 +62,7 @@ No external service, API key, or paid subscription is required for the first day
 
 ## The seven onboarding questions
 
-You do not need to prepare anything, but answers get much better if you think about them first. Full explanation in the [Russian guide](docs/ru/START-HERE.md#что-спросит-система).
+You do not need to prepare anything, but answers get much better if you think about them first. Full explanation in the [Russian guide](docs/ru/START-HERE.md#6-что-спросит-система).
 
 1. **Identity and business** — your role, the offer, the customer, the current stage.
 2. **Priorities for the next 90 days** — two or three outcomes with a number, date, or deliverable.
@@ -142,16 +142,19 @@ node scripts/aios-portability-scan.mjs     # personal paths, identifiers, secret
 Install a current Node.js release, then reopen the terminal and check `node --version`.
 
 **`npm test` fails on skill adapters.**
-Run `bash scripts/sync-skills.sh` and try again. It recreates the skill symlinks in every folder listed under `adapters` in `skills/policy.json`.
+Run `bash scripts/sync-skills.sh` and try again. It repairs only the wrong or missing skill symlinks in the folders listed under `adapters` in `skills/policy.json`.
+
+**Codex asks to approve a command.**
+Expected for downloads, Git commits, and changes in `.git/`, `.agents/`, or `.codex/`: its default sandbox keeps those read-only. Approve once. A fresh clone's bootstrap needs no approval because it writes nothing there.
 
 **The agent does not see `onboard-aios`.**
-Skills and rules are loaded from the repository root when a session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new session.
+Skills and rules are loaded from the repository root when a chat or session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new chat. In Codex, make sure the project is local, not cloud.
 
 **The agent asks something you already answered.**
 It reads `aios-intake.md` to resume. Edit that file directly and ask it to continue onboarding.
 
 **You want to start over.**
-Delete the generated files listed in `references/aios-structure.md`, set `context/system-state.md` back to `Status: fresh`, and run `onboard-aios` again. Your Git history still has everything.
+Ask the agent to restore the template versions of `aios-intake.md`, `context/`, `references/voice.md`, and `projects/registry.json` from the first commit and set `context/system-state.md` back to `Status: fresh`, then run `onboard-aios` again. Your Git history still has everything.
 
 ## Attribution
 

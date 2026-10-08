@@ -12,6 +12,12 @@ test("doctor validates the starter", () => {
   assert.equal(result.status, 0, result.stdout + result.stderr);
 });
 
+test("every runtime shim imports the one contract", () => {
+  for (const shim of ["CLAUDE.md", "GEMINI.md"]) {
+    assert.equal(fs.readFileSync(path.join(root, shim), "utf8").trim(), "@AGENTS.md", shim);
+  }
+});
+
 test("capture fallbacks are explicit", () => {
   const agents = fs.readFileSync(path.join(root, "AGENTS.md"), "utf8");
   assert.match(agents, /inbox\/tasks\.md/);
@@ -23,13 +29,16 @@ test("skills are manual-only and have adapters", () => {
   const skills = fs.readdirSync(path.join(root, "skills"), { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
+  const policy = JSON.parse(fs.readFileSync(path.join(root, "skills/policy.json"), "utf8"));
+  assert.ok(policy.adapters.includes(".agents/skills"), "universal .agents/skills adapter is required");
+  assert.ok(policy.adapters.includes(".claude/skills"), "Claude adapter is required");
   for (const skill of skills) {
     const yaml = fs.readFileSync(path.join(root, "skills", skill, "agents/openai.yaml"), "utf8");
     assert.match(yaml, /allow_implicit_invocation:\s*false/);
-    for (const base of [".agents/skills", ".claude/skills"]) {
+    for (const base of policy.adapters) {
       const adapter = path.join(root, base, skill);
       assert.equal(fs.lstatSync(adapter).isSymbolicLink(), true);
-      assert.equal(fs.readlinkSync(adapter), `../../skills/${skill}`);
+      assert.equal(fs.readlinkSync(adapter), path.relative(path.join(root, base), path.join(root, "skills", skill)));
     }
   }
 });

@@ -20,7 +20,7 @@ The model does not magically remember everything. It reads the smallest relevant
 
 - Ask normal questions from the repository root.
 - State the project and desired outcome.
-- Use `new-aios-project` when work becomes a distinct project.
+- Ask in plain words to start a project when work becomes distinct; the agent follows `references/aios-structure.md`.
 - Put source material in `raw/` and ask the agent to ingest it.
 - Use `wrap-aios` after a meaningful work session.
 - Use `audit-aios` periodically to find structural and backup gaps.

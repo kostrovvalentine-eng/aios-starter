@@ -15,6 +15,7 @@ const warnings = [];
 const required = [
   "AGENTS.md",
   "CLAUDE.md",
+  "GEMINI.md",
   "MANUAL.md",
   "connections.md",
   "context/system-state.md",
@@ -104,7 +105,9 @@ for (const skill of skills) {
   if (!/allow_implicit_invocation:\s*false/.test(yaml)) errors.push(`skill is not manual-only: ${skill}`);
 }
 
-for (const adapterRoot of [".agents/skills", ".claude/skills"]) {
+const adapterRoots = policy.adapters || [];
+if (adapterRoots.length === 0) errors.push("skills/policy.json lists no adapters");
+for (const adapterRoot of adapterRoots) {
   const fullRoot = path.join(root, adapterRoot);
   const visible = skills.filter((skill) => !hidden.has(skill));
   for (const skill of visible) {
@@ -114,7 +117,7 @@ for (const adapterRoot of [".agents/skills", ".claude/skills"]) {
       continue;
     }
     if (!fs.lstatSync(adapter).isSymbolicLink()) errors.push(`adapter is not a symlink: ${adapterRoot}/${skill}`);
-    else if (fs.readlinkSync(adapter) !== `../../skills/${skill}`) errors.push(`wrong adapter target: ${adapterRoot}/${skill}`);
+    else if (fs.readlinkSync(adapter) !== path.relative(fullRoot, path.join(root, "skills", skill))) errors.push(`wrong adapter target: ${adapterRoot}/${skill}`);
   }
 }
 
@@ -128,7 +131,7 @@ const secretPatterns = [
 
 for (const file of allFiles) {
   const extension = path.extname(file);
-  if (!textExtensions.has(extension) && !["AGENTS.md", "CLAUDE.md", "LICENSE"].includes(path.basename(file))) continue;
+  if (!textExtensions.has(extension) && !["AGENTS.md", "CLAUDE.md", "GEMINI.md", "LICENSE"].includes(path.basename(file))) continue;
   if (fs.statSync(file).size > 1_000_000) continue;
   const relative = path.relative(root, file);
   const content = fs.readFileSync(file, "utf8");

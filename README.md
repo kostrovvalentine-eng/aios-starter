@@ -14,7 +14,7 @@ It is not a chatbot, not a SaaS account, and not a database. It is your own priv
 - **Project memory** in `projects/` — current state in `README.md`, durable depth in `context.md`.
 - **A decision log** in `decisions/log.md` — final choices with reasoning, so nothing gets re-litigated.
 - **Safe local inboxes** in `inbox/` — tasks and events are captured from day one, before any service is connected.
-- **Reusable workflows** in `skills/` — four skills ship with the kit, manual-only by design.
+- **Reusable workflows** in `skills/` — three skills ship with the kit, manual-only by design. Anything a capable model can do from the protocols alone (like creating a project) is deliberately not a skill.
 - **A router** in `references/router-protocol.md` — how the agent finds the right file without loading everything.
 - **A health check** in `scripts/aios-doctor.mjs` — deterministic validation of structure, routing, and freshness.
 - **Git-backed history** — every meaningful change is a commit you can read, diff, and revert.
@@ -27,7 +27,7 @@ No external service, API key, or paid subscription is required for the first day
 |---|---|---|
 | Node.js 20 or newer | runs the setup, doctor, and tests | `node --version` |
 | Git | version history and the initial commit | `git --version` |
-| Claude Desktop (Code tab, paid plan) or Codex | the agent that reads this repository | open it once and sign in |
+| An agent that can read local files: Claude Desktop (Code tab, paid plan), Codex, Cursor, Gemini CLI, Copilot | reads this repository | open it once and sign in |
 | A GitHub account | "Use this template" creates your private copy | — |
 
 ## Install in five minutes
@@ -115,7 +115,6 @@ One fact has exactly one canonical home. Routers point at it instead of copying 
 Invoke with `/name` in Claude and `$name` in Codex.
 
 - `onboard-aios` — first-run interview and foundation scaffold.
-- `new-aios-project` — create routed project memory and an optional execution repo.
 - `wrap-aios` — save durable session state and create scoped local commits.
 - `audit-aios` — inspect context, connections, capabilities, cadence, and backup health.
 
@@ -143,7 +142,7 @@ node scripts/aios-portability-scan.mjs     # personal paths, identifiers, secret
 Install a current Node.js release, then reopen the terminal and check `node --version`.
 
 **`npm test` fails on skill adapters.**
-Run `bash scripts/sync-skills.sh` and try again. It recreates the `.agents/skills` and `.claude/skills` symlinks.
+Run `bash scripts/sync-skills.sh` and try again. It recreates the skill symlinks in every folder listed under `adapters` in `skills/policy.json`.
 
 **The agent does not see `onboard-aios`.**
 Skills and rules are loaded from the repository root when a session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new session.

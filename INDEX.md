@@ -1,8 +1,9 @@
 # AIOS Index
-*Last map change: 2026-10-06 by scripts/aios-doctor.mjs*
+*Last map change: 2026-10-08 by scripts/aios-doctor.mjs*
 
 - [AGENTS.md](AGENTS.md)
 - [CLAUDE.md](CLAUDE.md)
+- [GEMINI.md](GEMINI.md)
 - [MANUAL.md](MANUAL.md)
 - [README.md](README.md)
 - [aios-intake.md](aios-intake.md)
@@ -26,7 +27,6 @@
 - [references/security.md](references/security.md)
 - [references/voice.md](references/voice.md)
 - [skills/audit-aios/SKILL.md](skills/audit-aios/SKILL.md)
-- [skills/new-aios-project/SKILL.md](skills/new-aios-project/SKILL.md)
 - [skills/onboard-aios/SKILL.md](skills/onboard-aios/SKILL.md)
 - [skills/wrap-aios/SKILL.md](skills/wrap-aios/SKILL.md)
 - [templates/project/README.md](templates/project/README.md)

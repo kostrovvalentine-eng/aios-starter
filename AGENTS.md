@@ -1,6 +1,6 @@
 # AIOS Operating Contract
 
-This repository is the user's personal AI operating system. Claude and Codex are equal runtimes of the same system: Claude loads this file through `CLAUDE.md`, Codex discovers it directly. Both read and write the same canonical files, so either can continue the other's work. Never maintain a second instruction or memory hierarchy.
+This repository is the user's personal AI operating system. Every agent runtime is an equal seat of the same system: Codex, Cursor and most others read this file directly, Claude and Gemini load it through one-line `CLAUDE.md` and `GEMINI.md` shims. Both read and write the same canonical files, so either can continue the other's work. Never maintain a second instruction or memory hierarchy.
 
 ## Authority and source precedence
 
@@ -67,7 +67,7 @@ A credential the user supplies with a task is permission to use it for that task
 
 ## Skills
 
-Personal skills are manual-only. Invoke one only when the user names it (`/name` in Claude, `$name` in Codex), asks for that workflow by exact name, or continues an active run. Author skills only under `skills/`; `.agents/skills` and `.claude/skills` are generated adapters.
+Personal skills are manual-only. Invoke one only when the user names it (`/name` in Claude, `$name` in Codex), asks for that workflow by exact name, or continues an active run. Author skills only under `skills/`; the adapter folders listed in `skills/policy.json` are generated symlinks.
 
 ## Session close
 

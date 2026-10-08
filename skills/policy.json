@@ -3,5 +3,9 @@
   "scope": "personal-aios-skills",
   "default_invocation": "manual-only",
   "implicit_invocation_allowlist": [],
-  "hidden_from_discovery": []
+  "hidden_from_discovery": [],
+  "adapters": [
+    ".agents/skills",
+    ".claude/skills"
+  ]
 }

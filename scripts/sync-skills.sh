@@ -16,7 +16,17 @@ is_hidden() {
   node -e 'const p=require(process.argv[1]); process.exit((p.hidden_from_discovery || []).includes(process.argv[2]) ? 0 : 1)' "${POLICY_FILE}" "${candidate}"
 }
 
-for adapter in "${AIOS_ROOT}/.agents/skills" "${AIOS_ROOT}/.claude/skills"; do
+# Adapter folders are data in policy.json: one line per harness discovery path.
+adapters=()
+while IFS= read -r line; do adapters+=("${AIOS_ROOT}/${line}"); done < <(
+  node -e 'for (const a of require(process.argv[1]).adapters || []) console.log(a)' "${POLICY_FILE}"
+)
+if [[ ${#adapters[@]} -eq 0 ]]; then
+  printf 'skills/policy.json lists no adapters\n' >&2
+  exit 1
+fi
+
+for adapter in "${adapters[@]}"; do
   mkdir -p "${adapter}"
   while IFS= read -r existing; do
     if [[ -L "${existing}" ]]; then
@@ -30,7 +40,8 @@ for adapter in "${AIOS_ROOT}/.agents/skills" "${AIOS_ROOT}/.claude/skills"; do
   while IFS= read -r skill_dir; do
     skill_name="$(basename "${skill_dir}")"
     is_hidden "${skill_name}" && continue
-    ln -s "../../skills/${skill_name}" "${adapter}/${skill_name}"
+    rel="$(node -e 'const p=require("path"); console.log(p.relative(process.argv[1], p.join(process.argv[2], "skills", process.argv[3])))' "${adapter}" "${AIOS_ROOT}" "${skill_name}")"
+    ln -s "${rel}" "${adapter}/${skill_name}"
   done < <(find "${SKILLS_DIR}" -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print | sort)
 done
 

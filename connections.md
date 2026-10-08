@@ -1,5 +1,5 @@
 # Connections
-*Last updated: 2026-08-04*
+*Last updated: 2026-10-08*
 
 This file selects the canonical live source for each domain. Naming an app does not make it connected; mark it `connected` only after a read-only verification.
 
@@ -13,3 +13,14 @@ This file selects the canonical live source for each domain. Naming an app does 
 | Revenue / reporting | Not selected | not connected | pending | — |
 
 When connecting a service, document its owner, read/write scope, authentication mechanism, verification date, and exact source-of-truth boundary. Never store a secret value here.
+
+## Status levels
+
+`documented` (named here) < `configured` (tool or connector added) < `authenticated` (signed in) < `connected` (a read-only check returned the right data). Only the last one counts as working.
+
+## Easiest first connection
+
+- **Claude Desktop:** built-in connectors (Google Calendar, Gmail, Google Drive, Notion and others) are switched on in Claude's settings, no keys or code. Start read-only, verify one real read, then update this table.
+- **Codex:** add the service as an MCP server in its configuration, then verify the same way.
+
+Use one canonical source per domain. When a live task or calendar service is verified, migrate the open items from `inbox/` and mark the inbox as no longer canonical.

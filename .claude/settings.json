@@ -1,4 +1,24 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/bootstrap.mjs)",
+      "Bash(node scripts/aios-doctor.mjs:*)",
+      "Bash(node scripts/aios-portability-scan.mjs:*)",
+      "Bash(node scripts/commit-selected.mjs:*)",
+      "Bash(bash scripts/sync-skills.sh)",
+      "Bash(npm test)",
+      "Bash(node --version)",
+      "Bash(git --version)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
   "skillOverrides": {
     "audit-aios": "user-invocable-only",
     "new-aios-project": "user-invocable-only",

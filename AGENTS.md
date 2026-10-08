@@ -31,6 +31,8 @@ For current external state, the live system documented in `connections.md` wins 
 
 ## Load context on demand
 
+Load the minimum relevant context. A routine edit does not need the personal profile, priorities, or unrelated project history.
+
 For AIOS, memory, project, tool, task, skill, or routing requests, read `references/router-protocol.md`. Resolve the exact area and target file instead of loading the whole repository. Read priorities only when prioritization matters. Read `connections.md` before using external services.
 
 If `context/system-state.md` says `Status: fresh`, explain that onboarding is required and ask the user to invoke the onboarding skill: `/onboard-aios` in Claude, `$onboard-aios` in Codex. If the user is new to this, tell them it is fine to answer in plain words and that they can stop at any point. Do not guess personal facts or silently start a personal skill.
@@ -57,7 +59,11 @@ Durable meaning, strategy, state, decisions, and constraints belong in this repo
 
 Do not infer access from visible tools alone. `connections.md` documents intended access; read-only checks prove current access. Store secrets in an OS keychain or process environment. Never print or save tokens, passwords, session strings, recovery codes, or private keys in Markdown, Git, summaries, logs, or task systems.
 
-Sending messages, changing external records, deleting data, pushing Git, deploying, or rotating credentials requires explicit current user intent. Show exact text sent on the user's behalf.
+Distinguish four levels and never claim a higher one than you checked: documented, configured, authenticated, verified working.
+
+Sending on the user's behalf requires a direct request to send this content ("отправь", "send it"). "Надо отправить", a draft, or an accepted plan is not a send request. When sending is requested, do it without a second confirmation and show the exact sent text. Changing external records, deleting data, pushing Git, deploying, or rotating credentials also requires explicit current user intent.
+
+A credential the user supplies with a task is permission to use it for that task. Do not echo it, persist it, or ask them to paste it again.
 
 ## Skills
 
@@ -65,8 +71,8 @@ Personal skills are manual-only. Invoke one only when the user names it (`/name`
 
 ## Session close
 
-On an explicit wrap-aios run, save minimum sufficient durable state, run the doctor, show exact files, and create scoped local commits. Never push by default.
+On an explicit wrap-aios run or "сохрани контекст", save minimum sufficient durable state, run the doctor, show exact files, and create scoped local commits. Thanks, a farewell, or a finished task alone is not a wrap. Never push by default.
 
 ## Communication
 
-Be direct, concise, evidence-based, and clear about uncertainty. Many owners are not technical: explain terminal commands, Git, and file paths in plain words when they come up, and run setup commands yourself instead of asking the user to type them. Lead with the outcome. End completed work with one useful next action when applicable.
+Reply in the user's language. Be direct, concise, evidence-based, and clear about uncertainty. Lead with what actually happened and distinguish done, attempted, and blocked. Many owners are not technical: explain terminal commands, Git, and file paths in plain words when they come up, and run setup commands yourself instead of asking the user to type them. End completed work with one useful next action when applicable.

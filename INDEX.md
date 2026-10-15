@@ -1,5 +1,5 @@
 # AIOS Index
-*Last map change: 2026-10-08 by scripts/aios-doctor.mjs*
+*Last map change: 2026-10-15 by scripts/aios-doctor.mjs*
 
 - [AGENTS.md](AGENTS.md)
 - [CLAUDE.md](CLAUDE.md)
@@ -15,6 +15,7 @@
 - [context/system-state.md](context/system-state.md)
 - [context/team/overview.md](context/team/overview.md)
 - [decisions/log.md](decisions/log.md)
+- [docs/ru/START-HERE-CLAUDE.md](docs/ru/START-HERE-CLAUDE.md)
 - [docs/ru/START-HERE.md](docs/ru/START-HERE.md)
 - [inbox/events.md](inbox/events.md)
 - [inbox/tasks.md](inbox/tasks.md)

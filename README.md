@@ -1,6 +1,6 @@
 # AIOS Starter
 
-**Русскоязычный пошаговый гайд: [docs/ru/START-HERE.md](docs/ru/START-HERE.md).** Начни с него, если тебе удобнее по-русски.
+**Русскоязычные пошаговые гайды без Терминала:** [для Codex в приложении ChatGPT](docs/ru/START-HERE.md) и [для Claude Desktop](docs/ru/START-HERE-CLAUDE.md). Начни с них, если тебе удобнее по-русски.
 
 AIOS is a personal operating system for an AI agent. It is a folder of plain Markdown files plus a few small scripts, and it solves one problem: an AI assistant forgets everything between sessions, guesses facts about you, and loses decisions in chat history.
 
@@ -32,7 +32,7 @@ No external service or API key is needed on day one. You only need the agent app
 
 ## Install in five minutes
 
-**Never used a terminal?** Skip this section. Create an empty folder, add it as a local project in Codex (ChatGPT desktop app) or open it in Claude Desktop's Code tab, and paste the install message from the [Russian guide](docs/ru/START-HERE.md#5-шаги). The agent clones and bootstraps for you; you only approve its requests.
+**Never used a terminal?** Skip this section. Create an empty folder, add it as a local project in Codex (ChatGPT desktop app) or open it as a local session in Claude Desktop's Code tab, and paste the install message from the Russian guide for [Codex](docs/ru/START-HERE.md#5-шаги) or [Claude Desktop](docs/ru/START-HERE-CLAUDE.md#5-шаги). The agent clones and bootstraps for you; you only approve its requests.
 
 1. Click **Use this template** → **Create a new repository** on GitHub. Make it **private**. Name it anything, for example `my-aios`.
 
@@ -148,7 +148,7 @@ Run `bash scripts/sync-skills.sh` and try again. It repairs only the wrong or mi
 Expected for downloads, Git commits, and changes in `.git/`, `.agents/`, or `.codex/`: its default sandbox keeps those read-only. Approve once. A fresh clone's bootstrap needs no approval because it writes nothing there.
 
 **The agent does not see `onboard-aios`.**
-Skills and rules are loaded from the repository root when a chat or session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new chat. In Codex, make sure the project is local, not cloud.
+Skills and rules are loaded from the repository root when a chat or session starts. Open the cloned folder itself, not its parent, run the bootstrap, then start a new chat. In Codex, make sure the project is local, not cloud. In Claude Desktop, pick the **Local** environment and do not enable the worktree option.
 
 **The agent asks something you already answered.**
 It reads `aios-intake.md` to resume. Edit that file directly and ask it to continue onboarding.

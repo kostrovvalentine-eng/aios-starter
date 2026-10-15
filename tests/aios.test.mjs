@@ -62,3 +62,40 @@ test("portability scan detects a planted home path", () => {
     fs.unlinkSync(planted);
   }
 });
+
+// The two Russian guides are handed to different people, so each must stand
+// alone. The runtime-neutral sections and the install message must still be
+// one text, otherwise the guides drift apart the first time one is edited.
+test("the Russian guides share the runtime-neutral sections", () => {
+  const read = (name) => fs.readFileSync(path.join(root, "docs/ru", name), "utf8");
+  const sections = (text) => {
+    const map = new Map();
+    for (const part of text.split(/\n(?=## )/)) {
+      const match = part.match(/^## (.+)\n/);
+      if (match) map.set(match[1].trim(), part.slice(match[0].length).trim());
+    }
+    return map;
+  };
+  const codex = read("START-HERE.md");
+  const claude = read("START-HERE-CLAUDE.md");
+  const codexSections = sections(codex);
+  const claudeSections = sections(claude);
+  for (const title of [
+    "1. Что такое AIOS простыми словами",
+    "2. Зачем это тебе",
+    "3. Как это устроено",
+    "6. Что спросит система",
+    "10. Чего система не сделает без твоего разрешения",
+    "12. Если что-то сломалось",
+  ]) {
+    assert.ok(codexSections.has(title), `Codex guide lacks section ${title}`);
+    assert.equal(claudeSections.get(title), codexSections.get(title), `section differs: ${title}`);
+  }
+  const install = (text) => text.match(/```text\nУстанови сюда AIOS[\s\S]*?```/)?.[0];
+  assert.ok(install(codex), "Codex guide has no install message");
+  assert.equal(install(claude), install(codex), "install message differs between guides");
+  assert.match(codex, /\$onboard-aios Давай настроим систему/);
+  assert.match(claude, /\/onboard-aios Давай настроим систему/);
+  assert.match(claude, /START-HERE\.md\)/);
+  assert.match(codex, /START-HERE-CLAUDE\.md\)/);
+});
